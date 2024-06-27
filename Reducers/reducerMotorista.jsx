@@ -28,8 +28,15 @@ export function reducerMotorista(state, action) {
             return { ...state, assMotorista: action.payload };
         case 'SET_ASS_RESPONSAVEL':
             return { ...state, assResponsavel: action.payload };
-        // case 'RESET':
-        //     return { ...initialStateMotorista }
+        case 'RESET':
+            return {
+                ...state,
+                validacao: { conforme: null, img: null },
+                termo: { conforme: null },
+                observacao: null,
+                assMotorista: null,
+                assResponsavel: null,
+            }
         default:
             return state;
     }

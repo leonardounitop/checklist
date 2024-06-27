@@ -303,11 +303,10 @@ function PneusCheck() {
                         routes: [{ name: 'Home' }],
                     })
                 );
-                resetAllStates();
-                Alert.alert('Checklist Finalizada com Sucesso!');
+                Alert.alert('Checklist Finalizada com Sucesso!' + `${obj}`);
 
             } else {
-                Alert.alert('Ocorreu um erro!');
+                Alert.alert('Ocorreu um erro!' + `${obj}`);
             }
 
 
