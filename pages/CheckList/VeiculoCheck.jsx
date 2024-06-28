@@ -8,6 +8,7 @@ import { VeiculoContext } from '../../Context/VeiculooVault';
 import DropDownPicker from 'react-native-dropdown-picker';
 import RadioCardImg from '../../Components/Radio/RadioCardImg';
 import { GlobalContext } from '../../Context/GlobalVault';
+import { GlobalStyles } from '../../Styles/GlobalStyles';
 
 
 function VeiculoCheck() {
@@ -204,7 +205,7 @@ function VeiculoCheck() {
     return (
         <ScrollView contentContainerStyle={{ flexGrow: 1 }}>
             <View style={styles.container}>
-                <Text variant="headlineLarge" style={styles.title}>Veículo</Text>
+                <Text variant="headlineLarge" style={GlobalStyles.pageTitle}>Veículo</Text>
                 {contextVeiculo.dadosCheckVeiculo.map((item, index) => {
 
                     if (item.type === 'img/checkbox') {

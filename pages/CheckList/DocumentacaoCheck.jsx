@@ -4,19 +4,11 @@ import { DocumentacaoContext } from '../../Context/DocumentacaoVault';
 import { Button, Text } from 'react-native-paper';
 import { useNavigation } from '@react-navigation/native';
 import RadioCardImg from '../../Components/Radio/RadioCardImg';
+import { GlobalStyles } from '../../Styles/GlobalStyles';
 
 function DocumentacaoCheck() {
     const { dadosCheckDocumentacao } = useContext(DocumentacaoContext);
     const navigation = useNavigation();
-
-    if (!dadosCheckDocumentacao) {
-        return (
-            <View style={styles.container}>
-                <Text variant="headlineLarge" style={styles.title}>Carroceria</Text>
-                <Text>Carregando dados...</Text>
-            </View>
-        );
-    }
 
     function handlePress() {
 
@@ -45,7 +37,7 @@ function DocumentacaoCheck() {
     return (
         <ScrollView contentContainerStyle={{ flexGrow: 1 }}>
             <View style={styles.container}>
-                <Text variant="headlineLarge" style={styles.title}>Documentação</Text>
+                <Text variant="headlineLarge" style={GlobalStyles.pageTitle}>Documentação</Text>
 
                 {dadosCheckDocumentacao.map((item, index) => (
                     <RadioCardImg

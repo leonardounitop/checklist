@@ -1,6 +1,6 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { Alert, ScrollView, StyleSheet, View } from 'react-native';
-import { Text, useTheme, Button } from 'react-native-paper';
+import { Text, useTheme, Button, ActivityIndicator } from 'react-native-paper';
 import DropDownPicker from 'react-native-dropdown-picker';
 import Container from '../../Components/Container/Container';
 import { useNavigation } from '@react-navigation/native';
@@ -12,6 +12,7 @@ import { FerramentasContext } from '../../Context/FerramentasVault';
 import { DocumentacaoContext } from '../../Context/DocumentacaoVault';
 import { ConservacaoContext } from '../../Context/ConservacaoVault';
 import { CarroceriaContext } from '../../Context/CarroceriaVault';
+import { GlobalStyles } from '../../Styles/GlobalStyles';
 
 function HomeCheckList() {
 
@@ -61,6 +62,7 @@ function HomeCheckList() {
 
 
     const theme = useTheme();
+
 
 
 
@@ -151,9 +153,10 @@ function HomeCheckList() {
                 const obj = JSON.parse(json);
 
 
+
                 if (obj.autentic === 'sucess') {
                     setTipoVeiculo(obj.Tipo)
-                    contextVeiculo.dispatch({ type: 'SET_TIPO', payload: obj.Tipo || 'Leve' })
+                    contextVeiculo.dispatch({ type: 'SET_TIPO', payload: obj.Tipo || "Não Cadastrado" })
 
 
                     const objListCheck = [];
@@ -242,30 +245,27 @@ function HomeCheckList() {
     return (
         <Container>
             <ScrollView contentContainerStyle={styles.scrollView}>
-                <Text style={[styles.title, { color: theme.colors.primary }]}>Escolha uma placa</Text>
-                <View >
+                <Text style={GlobalStyles.title}>Escolha uma placa</Text>
 
 
-                    {listPlacas ? <DropDownPicker
-                        value={idPlaca}
-                        items={listPlacas}
-                        open={dropOpenVeiculo}
-                        setValue={setIdPlaca}
-                        onChangeValue={handleChangeValuePlaca}
-                        setOpen={setDropOpenVeiculo}
+                {listPlacas ? <DropDownPicker
+                    value={idPlaca}
+                    items={listPlacas}
+                    open={dropOpenVeiculo}
+                    setValue={setIdPlaca}
+                    onChangeValue={handleChangeValuePlaca}
+                    setOpen={setDropOpenVeiculo}
+                    style={{ marginBottom: 10 }}
+                    searchable={true}
+                    placeholder="Selecione a placa"
+                    searchPlaceholder="Digite a placa"
+                    listMode="MODAL" // Este modo facilita a navegação com muitas opções
+                /> : <Text>Carregando...</Text>}
 
-                        searchable={true}
-                        placeholder="Selecione a placa"
-                        searchPlaceholder="Digite a placa"
-                        style={{ marginBottom: 10 }}
-                        listMode="MODAL" // Este modo facilita a navegação com muitas opções
-                    /> : <Text>Carregando...</Text>}
 
 
-                </View>
-                <Text style={styles.text}>Tipo veiculo: {tipoVeiculo}</Text>
 
-                <Text style={[styles.title, { color: theme.colors.primary }]}>Motorista</Text>
+                <Text style={GlobalStyles.title}>Motorista</Text>
                 {listMotorista ? <DropDownPicker
                     value={idMotorista}
                     items={listMotorista}
@@ -273,7 +273,6 @@ function HomeCheckList() {
                     setValue={setIdMotorista}
                     onChangeValue={handleChangeValueMotorista}
                     setOpen={setDropOpenMotorista}
-
                     searchable={true}
                     placeholder="Selecione o motorista"
                     searchPlaceholder="Digite o nome"
@@ -282,7 +281,7 @@ function HomeCheckList() {
                 /> : <Text>Carregando...</Text>}
 
 
-                <Text style={[styles.title, { color: theme.colors.primary }]}>Tipo CheckList</Text>
+                <Text style={GlobalStyles.title}>Tipo CheckList</Text>
 
                 {listCheckListType ? <DropDownPicker
                     value={checkList}
@@ -291,13 +290,13 @@ function HomeCheckList() {
                     setValue={setCheckList}
                     onChangeValue={handleChangeValueCheckList}
                     setOpen={setDropOpenCheckList}
-
-                    searchable={true}
-                    placeholder="Selecione o tipo da CheckList"
-                    searchPlaceholder="Digite o nome"
+                    searchable={false}
+                    placeholder={listCheckListType ? 'Selecione a checklist' : 'Escolha uma placa primeiro'}
                     style={{ marginBottom: 10 }}
-                    listMode="MODAL" // Este modo facilita a navegação com muitas opções
-                /> : <Text>Informe a placa para iniciar a checklist</Text>}
+                    listMode="SCROLLVIEW"
+                /> : <Text>Escolha uma placa para selecionar o tipo da checklist</Text>}
+
+
 
                 <Button mode="contained" onPress={handlePress} style={styles.button}>
                     Continuar
@@ -313,10 +312,6 @@ const styles = StyleSheet.create({
         flexGrow: 1,
         justifyContent: 'center',
     },
-    title: {
-        fontSize: 20,
-        marginBottom: 20,
-    },
     pickerContainer: {
         width: '100%',
     },
@@ -330,9 +325,12 @@ const styles = StyleSheet.create({
         color: '#333',
     }, text: {
         fontSize: 20,
-        paddingVertical: 14
+        paddingVertical: 14,
+        textAlign: `left`
     }, button: {
         marginTop: 20
+    }, containerPlacaTipo: {
+        flexDirection: "row"
     }
 });
 

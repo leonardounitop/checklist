@@ -11,7 +11,7 @@ import { DocumentacaoContext } from '../../Context/DocumentacaoVault'
 import { ConservacaoContext } from '../../Context/ConservacaoVault'
 import { CarroceriaContext } from '../../Context/CarroceriaVault'
 import { GlobalContext } from '../../Context/GlobalVault';
-
+import { GlobalStyles } from '../../Styles/GlobalStyles';
 
 
 function PneusCheck() {
@@ -338,7 +338,7 @@ function PneusCheck() {
     return (
         <ScrollView contentContainerStyle={{ flexGrow: 1 }}>
             <View style={styles.container}>
-                <Text variant="headlineLarge" style={styles.title}>Pneus</Text>
+                <Text variant="headlineLarge" style={GlobalStyles.pageTitle}>Pneus</Text>
                 {contextPneu.dadosCheckPneus.map((item, index) => {
                     const { label, state, setState, type } = item;
 

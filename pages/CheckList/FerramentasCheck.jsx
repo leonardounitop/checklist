@@ -4,6 +4,7 @@ import { FerramentasContext } from '../../Context/FerramentasVault';
 import { Button, Text } from 'react-native-paper';
 import { useNavigation } from '@react-navigation/native';
 import RadioCardImg from '../../Components/Radio/RadioCardImg';
+import { GlobalStyles } from '../../Styles/GlobalStyles';
 
 function FerramentasCheck() {
     const { dadosCheckFerramentas } = useContext(FerramentasContext);
@@ -36,7 +37,7 @@ function FerramentasCheck() {
     return (
         <ScrollView contentContainerStyle={{ flexGrow: 1 }}>
             <View style={styles.container}>
-                <Text variant="headlineLarge" style={styles.title}>Ferramentas</Text>
+                <Text variant="headlineLarge" style={GlobalStyles.pageTitle}>Ferramentas</Text>
                 {dadosCheckFerramentas.map((item, index) => (
                     <RadioCardImg
                         key={index}

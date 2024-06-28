@@ -1,6 +1,6 @@
 import React, { useContext, useEffect, useState } from 'react'
 import { View, StyleSheet, Alert } from 'react-native'
-import { Button, TextInput, useTheme, Text } from 'react-native-paper';
+import { Button, TextInput } from 'react-native-paper';
 import { GlobalContext } from '../../Context/GlobalVault';
 import { useNavigation } from '@react-navigation/native';
 import { MotoristaContext } from '../../Context/MotoristaVault';
@@ -13,10 +13,12 @@ function Login() {
     const [loading, setLoading] = useState(false);
     const { setIdUsuario, setNomeUsuario } = useContext(GlobalContext);
     const { setResponsavel } = useContext(MotoristaContext)
+
+
+
     const navigation = useNavigation();
 
 
-    const theme = useTheme();
 
 
     async function handleLogin() {
@@ -125,7 +127,7 @@ function Login() {
                     onChangeText={text => setSenha(text)}
                 />
             </View>
-            <Button icon='login' mode="contained" onPress={handleLogin} loading={loading} >
+            <Button icon='login' mode="contained" onPress={handleLogin} loading={loading} disabled={loading} >
                 Entrar
             </Button>
         </View>

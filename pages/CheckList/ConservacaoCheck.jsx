@@ -4,6 +4,7 @@ import { ConservacaoContext } from '../../Context/ConservacaoVault';
 import { Button, Text } from 'react-native-paper';
 import { useNavigation } from '@react-navigation/native';
 import RadioCardImg from '../../Components/Radio/RadioCardImg';
+import { GlobalStyles } from '../../Styles/GlobalStyles';
 
 
 function ConservacaoCheck() {
@@ -41,7 +42,7 @@ function ConservacaoCheck() {
     return (
         <ScrollView contentContainerStyle={{ flexGrow: 1 }}>
             <View style={styles.container}>
-                <Text variant="headlineLarge" style={styles.title}>Conservacao</Text>
+                <Text variant="headlineLarge" style={GlobalStyles.pageTitle}>Conservacao</Text>
                 {dadosCheckConservacaoVeiculo.map((item, index) => (
                     <RadioCardImg
                         key={index}

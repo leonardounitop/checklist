@@ -6,6 +6,7 @@ import { useNavigation } from '@react-navigation/native';
 import { Text, Button } from 'react-native-paper';
 import RadioCardImg from '../../Components/Radio/RadioCardImg';
 import { MotoristaContext } from '../../Context/MotoristaVault';
+import { GlobalStyles } from '../../Styles/GlobalStyles';
 
 function MotoristaCheck() {
     const { dadosCheckMotorista, state, dispatch } = useContext(MotoristaContext);
@@ -17,14 +18,6 @@ function MotoristaCheck() {
         dispatch({ type, payload: value });
     };
 
-    if (!dadosCheckMotorista) {
-        return (
-            <View style={styles.container}>
-                <Text variant="headlineLarge" style={styles.title}>Motorista</Text>
-                <Text>Carregando dados...</Text>
-            </View>
-        );
-    }
 
     function handlePress() {
 
@@ -54,7 +47,7 @@ function MotoristaCheck() {
     return (
         <ScrollView contentContainerStyle={{ flexGrow: 1 }}>
             <View style={styles.container}>
-                <Text variant="headlineLarge" style={styles.title}>Motorista</Text>
+                <Text variant="headlineLarge" style={GlobalStyles.pageTitle}>Motorista</Text>
 
                 {dadosCheckMotorista.map((item, index) => {
 

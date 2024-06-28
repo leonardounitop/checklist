@@ -20,7 +20,7 @@ const customTheme = {
     ...DefaultTheme.colors,
     primary: '#1E88E5', // Azul primário
     accent: '#42A5F5',  // Azul claro
-    background: '#fff', // Fundo branco
+    background: '#FFF', // Fundo branco
     surface: '#FFFFFF', // Superfície branca
     text: '#0D47A1', // Texto azul escuro
     placeholder: '#90CAF9', // Placeholder azul claro
@@ -52,7 +52,12 @@ export default function App() {
             </VeiculoVault>
           </GlobalVault>
         </SafeAreaView>
-        <StatusBar style="auto" />
+        <StatusBar
+          barStyle="light-content" // ou "dark-content"
+          backgroundColor="#fff"
+          hidden={false}
+          translucent={true}
+        />
       </NavigationContainer>
     </PaperProvider>
   );
