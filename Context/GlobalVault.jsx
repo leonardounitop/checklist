@@ -14,19 +14,8 @@ export function GlobalVault({ children }) {
     const [primaryKey, setPrimaryKey] = useState(null);
     const [dadosRecebimento, setDadosRecebimento] = useState(null);
 
-    const [carroceriaState, carroceriaDispatch] = useReducer(reducerCarroceria, initialStateCarroceria);
-    const [conservacaoState, conservacaoDispatch] = useReducer(reducerConservacao, initialStateConservacao);
-    const [pneusState, pneusDispatch] = useReducer(reducerPneus, initialStatePneus);
-    const [ferramentasState, ferramentasDispatch] = useReducer(reducerFerramentas, initialStateFerramentas);
+    const [tipoDoVeiculo, setTipoDoVeiculo] = useState(null);
 
-    const resetAllStates = useCallback(() => {
-        console.log('Chamando resetAllStates');
-        carroceriaDispatch({ type: 'RESET' });
-        conservacaoDispatch({ type: 'RESET' });
-        pneusDispatch({ type: 'RESET' });
-        ferramentasDispatch({ type: 'RESET' });
-        console.log('Estados resetados');
-    }, [carroceriaDispatch, conservacaoDispatch, pneusDispatch, ferramentasDispatch]);
 
     return (
         <GlobalContext.Provider value={{
@@ -35,7 +24,8 @@ export function GlobalVault({ children }) {
             tipoCheckList, setTipoCheckList,
             primaryKey, setPrimaryKey,
             dadosRecebimento, setDadosRecebimento,
-            resetAllStates
+            setTipoDoVeiculo,
+
         }}>
             {children}
         </GlobalContext.Provider>

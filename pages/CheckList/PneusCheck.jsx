@@ -18,16 +18,27 @@ function PneusCheck() {
 
     const [loading, setLoading] = useState(false);
 
+    const contextGlobal = useContext(GlobalContext);
     const contextPneu = useContext(PneusContext);
     const contextMotorista = useContext(MotoristaContext);
     const contextVeiculo = useContext(VeiculoContext);
     const contextFerramentas = useContext(FerramentasContext);
     const contextDocumentacao = useContext(DocumentacaoContext);
     const contextConservacao = useContext(ConservacaoContext);
-
     const contextCarroceria = useContext(CarroceriaContext)
-    const contextGlobal = useContext(GlobalContext);
-    const { resetAllStates } = useContext(GlobalContext);
+
+
+
+
+    function resetFields() {
+        contextPneu.dispatch({ type: 'RESET' });
+        contextMotorista.dispatch({ type: 'RESET' });
+        contextVeiculo.dispatch({ type: 'RESET' });
+        contextFerramentas.dispatch({ type: 'RESET' });
+        contextDocumentacao.dispatch({ type: 'RESET' });
+        contextConservacao.dispatch({ type: 'RESET' });
+        contextCarroceria.dispatch({ type: 'RESET' });
+    }
 
     const navigation = useNavigation();
 
@@ -54,10 +65,7 @@ function PneusCheck() {
 
 
 
-
-
     const fetchData = async () => {
-        console.log('enviando...');
         try {
             setLoading(true);
             const response = await fetch('https://homologacao.unitopconsultoria.com.br/AppCheckList/execute.php', {
@@ -176,9 +184,6 @@ function PneusCheck() {
                     '5_aaf': isBool(contextConservacao.state.aerofolio.conforme),
                     '5_aag': isBase64(contextConservacao.state.aerofolio.img),
                     '5_aah': contextConservacao.state.aerofolio.os,
-                    '5_aaf': isBool(contextConservacao.state.aerofolio.conforme),
-                    '5_aag': isBase64(contextConservacao.state.aerofolio.img),
-                    '5_aah': contextConservacao.state.aerofolio.os,
                     '5_aai': isBool(contextConservacao.state.nivelAgua.conforme),
                     '5_aaj': isBool(contextConservacao.state.vazamentoAgua.conforme),
                     '5_aak': isBool(contextConservacao.state.nivelOleoMotor.conforme),
@@ -218,9 +223,9 @@ function PneusCheck() {
                     '6_y': isBool(contextCarroceria.state.ladoEsquerdoExterno.conforme),
                     '6_z': isBase64(contextCarroceria.state.ladoEsquerdoExterno.img),
                     '6_aa': contextCarroceria.state.ladoEsquerdoExterno.obs,
-                    '6_y': isBool(contextCarroceria.state.ladoEsquerdoExterno.conforme),
-                    '6_z': isBase64(contextCarroceria.state.ladoEsquerdoExterno.img),
-                    '6_aa': contextCarroceria.state.ladoEsquerdoExterno.obs,
+                    // '6_y': isBool(contextCarroceria.state.ladoEsquerdoExterno.conforme),
+                    // '6_z': isBase64(contextCarroceria.state.ladoEsquerdoExterno.img),
+                    // '6_aa': contextCarroceria.state.ladoEsquerdoExterno.obs,
                     '6_ab': contextCarroceria.state.ganchos.conforme,
                     '6_ac': isBase64(contextCarroceria.state.ganchos.img),
                     '6_ad': contextCarroceria.state.tendal.conforme,
@@ -296,17 +301,18 @@ function PneusCheck() {
             const obj = JSON.parse(json);
 
 
-            if (obj.autentic === 'sucess') {
+
+            if (obj.autentic == 'sucess') {
+                resetFields();
                 navigation.dispatch(
                     CommonActions.reset({
                         index: 0,
                         routes: [{ name: 'Home' }],
                     })
                 );
-                Alert.alert('Checklist Finalizada com Sucesso!' + `${obj}`);
-
+                Alert.alert('Checklist Finalizada com Sucesso! ' + `${obj.status}`);
             } else {
-                Alert.alert('Ocorreu um erro!' + `${obj}`);
+                Alert.alert('Ocorreu um erro!' + `${obj.message}`);
             }
 
 

@@ -28,6 +28,7 @@ function MotoristaCheck() {
 
     function handlePress() {
 
+
         let checkValues = true;
 
 

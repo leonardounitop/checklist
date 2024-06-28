@@ -9,12 +9,7 @@ const Input = React.memo(({ label, value, setState, ...props }) => {
         : (value !== null ? String(value) : null);
 
     const handleChangeText = (text) => {
-        const newValue = isNaN(text) ? text : parseInt(text, 10);
-        if (typeof value === 'object' && value !== null && 'conforme' in value) {
-            setState({ ...value, conforme: newValue });
-        } else {
-            setState(newValue);
-        }
+        setState(text);
     };
 
     return (

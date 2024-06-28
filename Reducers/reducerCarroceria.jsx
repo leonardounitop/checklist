@@ -94,7 +94,39 @@ export function reducerCarroceria(state, action) {
         case 'SET_ESGUICHO_PARABRISA':
             return { ...state, esguichoParabrisa: { ...state.esguichoParabrisa, ...action.payload } };
         case 'RESET':
-            return { ...initialStateCarroceria };
+            return {
+                frenteInterno: { conforme: null, img: null, obs: null },
+                traseiroInterno: { conforme: null, img: null, obs: null },
+                ladoDireitoInterno: { conforme: null, img: null, obs: null },
+                ladoEsquerdoInterno: { conforme: null, img: null, obs: null },
+                tetoInterno: { conforme: null, img: null, obs: null },
+                frenteExterno: { conforme: null, img: null, obs: null },
+                traseiroExterno: { conforme: null, img: null, obs: null },
+                ladoDireitoExterno: { conforme: null, img: null, obs: null },
+                ladoEsquerdoExterno: { conforme: null, img: null, obs: null },
+
+                ganchos: { conforme: null, img: null, obs: null },
+                tendal: { conforme: null, img: null, obs: null },
+                cortina: { conforme: null, img: null, obs: null },
+                statusPreventiva: { conforme: null, img: null, obs: null },
+
+                partidaVeiculo: { conforme: null, img: null, obs: null },
+                limpadoresParaBrisa: { conforme: null, img: null, obs: null },
+                esguichoParabrisa: { conforme: null, img: null, obs: null },
+                buzina: { conforme: null, img: null, obs: null },
+                setasDianteira: { conforme: null, img: null, obs: null },
+                setasTraseiras: { conforme: null, img: null, obs: null },
+                farolAltoBaixo: { conforme: null, img: null, obs: null },
+                verificarRe: { conforme: null, img: null, obs: null },
+
+                piscaDianteira: { conforme: null, img: null, obs: null },
+                piscaTraseira: { conforme: null, img: null, obs: null },
+                luzFreio: { conforme: null, img: null, obs: null },
+                luzPlaca: { conforme: null, img: null, obs: null },
+                iluminacaoPainel: { conforme: null, img: null, obs: null },
+                vidroEletrico: { conforme: null, img: null, obs: null },
+                travaEletrica: { conforme: null, img: null, obs: null },
+            };
         default:
             return state;
     }

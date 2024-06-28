@@ -7,11 +7,35 @@ import { useNavigation } from '@react-navigation/native';
 import { VeiculoContext } from '../../Context/VeiculooVault'
 import { MotoristaContext } from '../../Context/MotoristaVault';
 import { GlobalContext } from '../../Context/GlobalVault';
+import { PneusContext } from '../../Context/PneusVault';
+import { FerramentasContext } from '../../Context/FerramentasVault';
+import { DocumentacaoContext } from '../../Context/DocumentacaoVault';
+import { ConservacaoContext } from '../../Context/ConservacaoVault';
+import { CarroceriaContext } from '../../Context/CarroceriaVault';
 
 function HomeCheckList() {
 
     const contextVeiculo = useContext(VeiculoContext)
     const contextMotorista = useContext(MotoristaContext);
+    const contextPneu = useContext(PneusContext);
+    const contextFerramentas = useContext(FerramentasContext);
+    const contextDocumentacao = useContext(DocumentacaoContext);
+    const contextConservacao = useContext(ConservacaoContext);
+    const contextCarroceria = useContext(CarroceriaContext)
+
+
+
+    function resetFields() {
+        contextPneu.dispatch({ type: 'RESET' });
+        contextMotorista.dispatch({ type: 'RESET' });
+        contextVeiculo.dispatch({ type: 'RESET' });
+        contextFerramentas.dispatch({ type: 'RESET' });
+        contextDocumentacao.dispatch({ type: 'RESET' });
+        contextConservacao.dispatch({ type: 'RESET' });
+        contextCarroceria.dispatch({ type: 'RESET' });
+    }
+
+
     const { setTipoCheckList } = useContext(GlobalContext);
 
     const [idPlaca, setIdPlaca] = useState(null);   // Armazenas o id do veiculo
@@ -41,6 +65,7 @@ function HomeCheckList() {
 
 
     const handleChangeValuePlaca = (value) => {
+        resetFields();
         setCheckList(null);
         setTipoCheckList(null);
         setIdPlaca(value);
@@ -272,7 +297,7 @@ function HomeCheckList() {
                     searchPlaceholder="Digite o nome"
                     style={{ marginBottom: 10 }}
                     listMode="MODAL" // Este modo facilita a navegação com muitas opções
-                /> : ''}
+                /> : <Text>Informe a placa para iniciar a checklist</Text>}
 
                 <Button mode="contained" onPress={handlePress} style={styles.button}>
                     Continuar

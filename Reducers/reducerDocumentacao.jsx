@@ -23,7 +23,14 @@ export function reducerDocumentacao(state, action) {
         case 'SET_TESTE_FRIO':
             return { ...state, testeFrio: { ...state.testeFrio, ...action.payload } };
         case 'RESET':
-            return { ...initialStateDocumentacao }
+            return {
+                crlv: { conforme: null },
+                aet: { conforme: null },
+                certificadoTacografo: { conforme: null },
+                manual: { conforme: null },
+                placaLacre: { conforme: null },
+                testeFrio: { conforme: null }
+            }
         default:
             return state;
     }

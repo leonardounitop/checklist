@@ -1,12 +1,14 @@
 import React, { createContext, useCallback, useContext, useEffect, useMemo, useReducer } from 'react';
 import { initialStatePneus, reducerPneus } from '../Reducers/reducerPneus'
 import { GlobalContext } from './GlobalVault';
+import { VeiculoContext } from './VeiculooVault';
 
 export const PneusContext = createContext();
 
 export function PneusVault({ children }) {
     const [state, dispatch] = useReducer(reducerPneus, initialStatePneus);
     const { tipoCheckList, dadosRecebimento } = useContext(GlobalContext);
+    const contextVeiculo = useContext(VeiculoContext);
 
 
     const setPrimeiroDE = useCallback((value) => dispatch({ type: 'SET_PRIMEIRO_DE', payload: value }), [dispatch]);
@@ -33,7 +35,6 @@ export function PneusVault({ children }) {
 
 
 
-
     const dadosCheckPneus = useMemo(() => {
         let camposPneus = [
             { label: "1DE", state: state.primeiroDE, setState: setPrimeiroDE, type: 'img/input', inputProps: { keyboardType: 'numeric' } },
@@ -53,9 +54,11 @@ export function PneusVault({ children }) {
         ];
 
         if (tipoCheckList === 'checklist_thermoking') {
+
             camposPneus = []
 
         } else if (tipoCheckList === 'checklist_veiculo_leve') {
+
             camposPneus = [
                 { label: "1º Eixo Direito", state: state.primeiroLeveD, setState: setPrimeiroLeveD, type: 'img/checkbox', inputProps: {} },
                 { label: "1º Eixo Esquerdo", state: state.primeiroLeveE, setState: setPrimeiroLeveE, type: 'img/checkbox', inputProps: {} },
@@ -64,20 +67,71 @@ export function PneusVault({ children }) {
                 { label: "Estepe", state: state.leveEstepeUm, setState: setLeveEstepe, type: 'img/checkbox', inputProps: {} },
             ]
         } else if (tipoCheckList === 'checklist_toco_truck_3_4') {
-            camposPneus = [
-                { label: "1DE", state: state.primeiroDE, setState: setPrimeiroDE, type: 'img/input', inputProps: { keyboardType: 'numeric' } },
-                { label: "1EE", state: state.primeiroEE, setState: setPrimeiroEE, type: 'img/input', inputProps: { keyboardType: 'numeric' } },
-                { label: "2DE", state: state.segundoDE, setState: setSegundoDE, type: 'img/input', inputProps: { keyboardType: 'numeric' } },
-                { label: "2DI", state: state.segundoDI, setState: setSegundoDI, type: 'img/input', inputProps: { keyboardType: 'numeric' } },
-                { label: "2EE", state: state.segundoEE, setState: setSegundoEE, type: 'img/input', inputProps: { keyboardType: 'numeric' } },
-                { label: "2EI", state: state.segundoEI, setState: setSegundoEI, type: 'img/input', inputProps: { keyboardType: 'numeric' } },
-                { label: "3DE", state: state.terceiroDE, setState: setTerceiroDE, type: 'img/input', inputProps: { keyboardType: 'numeric' } },
-                { label: "3DI", state: state.terceiroDI, setState: setTerceiroDI, type: 'img/input', inputProps: { keyboardType: 'numeric' } },
-                { label: "3EE", state: state.terceiroEE, setState: setTerceiroEE, type: 'img/input', inputProps: { keyboardType: 'numeric' } },
-                { label: "3EI", state: state.terceiroEI, setState: setTerceiroEI, type: 'img/input', inputProps: { keyboardType: 'numeric' } },
-                { label: "E1", state: state.estepeUm, setState: setEstopeUm, type: 'img/input', inputProps: { keyboardType: 'numeric' } },
-                { label: "E2", state: state.estepeDois, setState: setEstopeDois, type: 'img/input', inputProps: { keyboardType: 'numeric' } },
-            ];
+
+            // checklist_toco_truck_3_4
+
+            const { tipo } = contextVeiculo.state;
+            const tipoArray = ['Toco', 'Cavalo Toco', '3/4'];
+            const isTocoCavalo34 = tipoArray.includes(tipo);
+
+
+            if (isTocoCavalo34) {
+                camposPneus = [
+                    { label: "1DE", state: state.primeiroDE, setState: setPrimeiroDE, type: 'img/input', inputProps: { keyboardType: 'numeric' } },
+                    { label: "1EE", state: state.primeiroEE, setState: setPrimeiroEE, type: 'img/input', inputProps: { keyboardType: 'numeric' } },
+                    { label: "2DE", state: state.segundoDE, setState: setSegundoDE, type: 'img/input', inputProps: { keyboardType: 'numeric' } },
+                    { label: "2DI", state: state.segundoDI, setState: setSegundoDI, type: 'img/input', inputProps: { keyboardType: 'numeric' } },
+                    { label: "2EE", state: state.segundoEE, setState: setSegundoEE, type: 'img/input', inputProps: { keyboardType: 'numeric' } },
+                    { label: "2EI", state: state.segundoEI, setState: setSegundoEI, type: 'img/input', inputProps: { keyboardType: 'numeric' } },
+                    { label: "E1", state: state.estepeUm, setState: setEstopeUm, type: 'img/input', inputProps: { keyboardType: 'numeric' } },
+                    { label: "E2", state: state.estepeDois, setState: setEstopeDois, type: 'img/input', inputProps: { keyboardType: 'numeric' } },
+                ];
+            } else if (tipo === 'HR') {
+                camposPneus = [
+                    { label: "1DE", state: state.primeiroDE, setState: setPrimeiroDE, type: 'img/input', inputProps: { keyboardType: 'numeric' } },
+                    { label: "1EE", state: state.primeiroEE, setState: setPrimeiroEE, type: 'img/input', inputProps: { keyboardType: 'numeric' } },
+                    { label: "2DE", state: state.segundoDE, setState: setSegundoDE, type: 'img/input', inputProps: { keyboardType: 'numeric' } },
+                    { label: "2DI", state: state.segundoDI, setState: setSegundoDI, type: 'img/input', inputProps: { keyboardType: 'numeric' } },
+                    { label: "2EE", state: state.segundoEE, setState: setSegundoEE, type: 'img/input', inputProps: { keyboardType: 'numeric' } },
+                    { label: "2EI", state: state.segundoEI, setState: setSegundoEI, type: 'img/input', inputProps: { keyboardType: 'numeric' } },
+                    { label: "E1", state: state.estepeUm, setState: setEstopeUm, type: 'img/input', inputProps: { keyboardType: 'numeric' } },
+                ];
+            } else {
+                camposPneus = [
+                    { label: "1DE", state: state.primeiroDE, setState: setPrimeiroDE, type: 'img/input', inputProps: { keyboardType: 'numeric' } },
+                    { label: "1EE", state: state.primeiroEE, setState: setPrimeiroEE, type: 'img/input', inputProps: { keyboardType: 'numeric' } },
+                    { label: "2DE", state: state.segundoDE, setState: setSegundoDE, type: 'img/input', inputProps: { keyboardType: 'numeric' } },
+                    { label: "2DI", state: state.segundoDI, setState: setSegundoDI, type: 'img/input', inputProps: { keyboardType: 'numeric' } },
+                    { label: "2EE", state: state.segundoEE, setState: setSegundoEE, type: 'img/input', inputProps: { keyboardType: 'numeric' } },
+                    { label: "2EI", state: state.segundoEI, setState: setSegundoEI, type: 'img/input', inputProps: { keyboardType: 'numeric' } },
+                    { label: "3DE", state: state.terceiroDE, setState: setTerceiroDE, type: 'img/input', inputProps: { keyboardType: 'numeric' } },
+                    { label: "3DI", state: state.terceiroDI, setState: setTerceiroDI, type: 'img/input', inputProps: { keyboardType: 'numeric' } },
+                    { label: "3EE", state: state.terceiroEE, setState: setTerceiroEE, type: 'img/input', inputProps: { keyboardType: 'numeric' } },
+                    { label: "3EI", state: state.terceiroEI, setState: setTerceiroEI, type: 'img/input', inputProps: { keyboardType: 'numeric' } },
+                    { label: "E1", state: state.estepeUm, setState: setEstopeUm, type: 'img/input', inputProps: { keyboardType: 'numeric' } },
+                    { label: "E2", state: state.estepeDois, setState: setEstopeDois, type: 'img/input', inputProps: { keyboardType: 'numeric' } },
+                ];
+
+            }
+
+
+
+
+
+            // camposPneus = [
+            //     { label: "1DE", state: state.primeiroDE, setState: setPrimeiroDE, type: 'img/input', inputProps: { keyboardType: 'numeric' } },
+            //     { label: "1EE", state: state.primeiroEE, setState: setPrimeiroEE, type: 'img/input', inputProps: { keyboardType: 'numeric' } },
+            //     { label: "2DE", state: state.segundoDE, setState: setSegundoDE, type: 'img/input', inputProps: { keyboardType: 'numeric' } },
+            //     { label: "2DI", state: state.segundoDI, setState: setSegundoDI, type: 'img/input', inputProps: { keyboardType: 'numeric' } },
+            //     { label: "2EE", state: state.segundoEE, setState: setSegundoEE, type: 'img/input', inputProps: { keyboardType: 'numeric' } },
+            //     { label: "2EI", state: state.segundoEI, setState: setSegundoEI, type: 'img/input', inputProps: { keyboardType: 'numeric' } },
+            //     { label: "3DE", state: state.terceiroDE, setState: setTerceiroDE, type: 'img/input', inputProps: { keyboardType: 'numeric' } },
+            //     { label: "3DI", state: state.terceiroDI, setState: setTerceiroDI, type: 'img/input', inputProps: { keyboardType: 'numeric' } },
+            //     { label: "3EE", state: state.terceiroEE, setState: setTerceiroEE, type: 'img/input', inputProps: { keyboardType: 'numeric' } },
+            //     { label: "3EI", state: state.terceiroEI, setState: setTerceiroEI, type: 'img/input', inputProps: { keyboardType: 'numeric' } },
+            //     { label: "E1", state: state.estepeUm, setState: setEstopeUm, type: 'img/input', inputProps: { keyboardType: 'numeric' } },
+            //     { label: "E2", state: state.estepeDois, setState: setEstopeDois, type: 'img/input', inputProps: { keyboardType: 'numeric' } },
+            // ];
         } else if (tipoCheckList === 'checklist_graneleiro') {
             camposPneus = [
                 { label: "1DE", state: state.primeiroDE, setState: setPrimeiroDE, type: 'img/input', inputProps: { keyboardType: 'numeric' } },
@@ -92,7 +146,7 @@ export function PneusVault({ children }) {
         }
 
         return camposPneus;
-    }, [state, tipoCheckList]);
+    }, [state, tipoCheckList, contextVeiculo.state]);
 
 
 

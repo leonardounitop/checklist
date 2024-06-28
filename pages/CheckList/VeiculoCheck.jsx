@@ -56,6 +56,7 @@ function VeiculoCheck() {
                 const obj = JSON.parse(json);
 
 
+
                 if (obj.autentic == 'sucess') {
                     contextVeiculo.dispatch({ type: 'SET_ENTREGA_DEVOLUCAO', payload: obj.EntregaRecebimento })
 

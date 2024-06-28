@@ -63,7 +63,28 @@ export function reducerPneus(state, action) {
         case 'SET_LEVE_ESTEPE':
             return { ...state, leveEstepeUm: { ...state.leveEstepeUm, ...action.payload } };
         case 'RESET':
-            return { ...initialStatePneus };
+            return {
+                primeiroDE: { conforme: null, img: null },
+                primeiroDI: { conforme: null, img: null },
+                primeiroEE: { conforme: null, img: null },
+                primeiroEI: { conforme: null, img: null },
+                segundoDE: { conforme: null, img: null },
+                segundoDI: { conforme: null, img: null },
+                segundoEE: { conforme: null, img: null },
+                segundoEI: { conforme: null, img: null },
+                terceiroDE: { conforme: null, img: null },
+                terceiroDI: { conforme: null, img: null },
+                terceiroEE: { conforme: null, img: null },
+                terceiroEI: { conforme: null, img: null },
+                estepeUm: { conforme: null, img: null },
+                estepeDois: { conforme: null, img: null },
+
+                primeiroLeveD: { conforme: null, img: null },
+                primeiroLeveE: { conforme: null, img: null },
+                segundoLeveD: { conforme: null, img: null },
+                segundoLeveE: { conforme: null, img: null },
+                leveEstepeUm: { conforme: null, img: null },
+            };
         default:
             return state;
     }
