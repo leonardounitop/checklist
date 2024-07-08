@@ -66,6 +66,7 @@ function PneusCheck() {
 
 
     const fetchData = async () => {
+
         try {
             setLoading(true);
             const response = await fetch('https://homologacao.unitopconsultoria.com.br/AppCheckList/execute.php', {
@@ -301,9 +302,9 @@ function PneusCheck() {
             const obj = JSON.parse(json);
 
 
-
             if (obj.autentic == 'sucess') {
                 resetFields();
+                contextGlobal.setPrimaryKey(null);
                 navigation.dispatch(
                     CommonActions.reset({
                         index: 0,
