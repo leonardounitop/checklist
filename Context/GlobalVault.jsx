@@ -12,6 +12,7 @@ export function GlobalVault({ children }) {
     const [dadosRecebimento, setDadosRecebimento] = useState(null);
     const [tipoDoVeiculo, setTipoDoVeiculo] = useState(null);
     const [numeroEixosVeiculo, setNumeroEixosVeiculo] = useState(null);
+    const [isCavalo, setIsCavalo] = useState(null);
 
     return (
         <GlobalContext.Provider value={{
@@ -21,7 +22,8 @@ export function GlobalVault({ children }) {
             primaryKey, setPrimaryKey,
             dadosRecebimento, setDadosRecebimento,
             tipoDoVeiculo, setTipoDoVeiculo,
-            numeroEixosVeiculo, setNumeroEixosVeiculo
+            numeroEixosVeiculo, setNumeroEixosVeiculo,
+            isCavalo, setIsCavalo
         }}>
             {children}
         </GlobalContext.Provider>

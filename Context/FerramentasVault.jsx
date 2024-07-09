@@ -6,7 +6,7 @@ export const FerramentasContext = createContext();
 
 export function FerramentasVault({ children }) {
     const [state, dispatch] = useReducer(reducerFerramentas, initialStateFerramentas);
-    const { tipoCheckList, dadosRecebimento } = useContext(GlobalContext);
+    const { tipoCheckList, dadosRecebimento, isCavalo } = useContext(GlobalContext);
 
 
 
@@ -67,8 +67,20 @@ export function FerramentasVault({ children }) {
                 { label: 'Jogo de Chinil Completo', type: 'checkbox', inputProps: {}, state: state.jogoChinil, setState: setJogoChinil },
                 { label: 'Tablet Rastreamento', type: 'checkbox', inputProps: {}, state: state.tabletRastreamento, setState: setTabletRastreamento },
                 { label: 'Lona de Cobertura', type: 'checkbox', inputProps: {}, state: state.lonaCobertura, setState: setLonaCobertura },
-
             ];
+            if (isCavalo) {
+                camposFerramentas = [
+                    { label: 'Extintor 1KG ou 2 KG', type: 'checkbox', inputProps: {}, state: state.extintor, setState: setExtintor },
+                    { label: 'Macaco Hidráulico C/ Cabo de Força', type: 'checkbox', inputProps: {}, state: state.macacoHidraulico, setState: setMacacoHidraulico },
+                    { label: 'Chave de Roda', type: 'checkbox', inputProps: {}, state: state.chaveRoda, setState: setChaveRoda },
+                    { label: 'Triângulo de Sinalização', type: 'checkbox', inputProps: {}, state: state.trianguloSinalizacao, setState: setTrianguloSinalizacao },
+                    { label: 'Antena', type: 'checkbox', inputProps: {}, state: state.antenasPX, setState: setAntenasPX },
+                    { label: 'Rádio', type: 'checkbox', inputProps: {}, state: state.radioPX, setState: setRadioPX },
+                    { label: 'Jogo de Chinil Completo', type: 'checkbox', inputProps: {}, state: state.jogoChinil, setState: setJogoChinil },
+                    { label: 'Tablet Rastreamento', type: 'checkbox', inputProps: {}, state: state.tabletRastreamento, setState: setTabletRastreamento },
+                ];
+            }
+
         } else if (tipoCheckList === 'checklist_veiculo_leve') {
             camposFerramentas = [];
             camposFerramentas = camposFerramentas.concat([
@@ -86,7 +98,8 @@ export function FerramentasVault({ children }) {
         return camposFerramentas;
     }, [
         state,
-        tipoCheckList
+        tipoCheckList,
+        isCavalo
     ]);
 
 

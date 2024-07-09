@@ -39,7 +39,10 @@ export function PneusVault({ children }) {
 
         /****************************************
          * JOÃO - 2024-07-09                    *
-         * MODELO DE COMO SERÁ FEITO O PNEU     *
+         * MODELO DE COMO SERÁ FEITO O PNEU   
+         * 
+         * Leonardo
+         * Coloquei o numero de eixo em um contexto global. (Esta sendo resetado tbm ao finalizar a checklist)  *
          ****************************************/
 
 

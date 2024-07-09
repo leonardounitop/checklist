@@ -5,10 +5,12 @@ import { Button, Text } from 'react-native-paper';
 import { useNavigation } from '@react-navigation/native';
 import RadioCardImg from '../../Components/Radio/RadioCardImg';
 import { GlobalStyles } from '../../Styles/GlobalStyles';
+import { GlobalContext } from '../../Context/GlobalVault';
 
 
 function ConservacaoCheck() {
     const { dadosCheckConservacaoVeiculo } = useContext(ConservacaoContext);
+    const { isCavalo } = useContext(GlobalContext)
     const navigation = useNavigation();
 
 
@@ -32,7 +34,12 @@ function ConservacaoCheck() {
 
 
         if (checkValues) {
-            navigation.navigate('Carroceria');
+            if (isCavalo) {
+                navigation.navigate('Pneus');
+            } else {
+                navigation.navigate('Carroceria');
+            }
+
         } else {
             Alert.alert('Atenção! Preencha todos os campos!')
         }

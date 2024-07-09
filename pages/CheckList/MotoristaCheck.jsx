@@ -309,6 +309,7 @@ function MotoristaCheck() {
                 resetFields();
                 contextGlobal.setPrimaryKey(null);
                 contextGlobal.setNumeroEixosVeiculo(null);
+                contextGlobal.setIsCavalo(null);
                 navigation.dispatch(
                     CommonActions.reset({
                         index: 0,

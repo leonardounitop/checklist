@@ -40,7 +40,7 @@ function HomeCheckList() {
     }
 
 
-    const { setTipoCheckList, setNumeroEixosVeiculo, numeroEixosVeiculo } = useContext(GlobalContext);
+    const { setTipoCheckList, setNumeroEixosVeiculo, numeroEixosVeiculo, setIsCavalo } = useContext(GlobalContext);
 
     const [idPlaca, setIdPlaca] = useState(null);   // Armazenas o id do veiculo
     const [placaLabel, setPlacaLabel] = useState(''); //Armazenar o rótulo da placa selecionada
@@ -170,6 +170,8 @@ function HomeCheckList() {
                     obj.Checklist.forEach(v => {
                         let formatarValor = '';
 
+                        setIsCavalo(obj.isCavalo);
+
                         if (obj.isCavalo) {
                             formatarValor = 'Checklist Cavalo';
 
@@ -253,7 +255,7 @@ function HomeCheckList() {
 
 
         if (idPlaca && placaLabel && motoristaLabel && idMotorista && checkList && numeroEixosVeiculo) {
-            navigation.navigate('Veiculo')
+            navigation.navigate('Veiculo');
         } else {
             Alert.alert('Atenção! Escolha todas informações!');
         }

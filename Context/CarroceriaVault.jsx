@@ -6,7 +6,7 @@ export const CarroceriaContext = createContext();
 
 export function CarroceriaVault({ children }) {
     const [state, dispatch] = useReducer(reducerCarroceria, initialStateCarroceria);
-    const { tipoCheckList, dadosRecebimento } = useContext(GlobalContext);
+    const { tipoCheckList, dadosRecebimento, isCavalo } = useContext(GlobalContext);
 
 
     const setFrenteInterno = useCallback((value) => dispatch({ type: 'SET_FRENTE_INTERNO', payload: value }), [dispatch]);
@@ -84,9 +84,13 @@ export function CarroceriaVault({ children }) {
             ]
         }
 
+        if (isCavalo) {
+            camposCarroceria = [];
+        }
+
         return camposCarroceria;
     }, [
-        state, tipoCheckList
+        state, tipoCheckList, isCavalo
     ]);
 
     const hasValue = (value) => {

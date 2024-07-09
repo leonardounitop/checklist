@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useContext, useEffect } from 'react';
 import { View, ScrollView, StyleSheet, Alert } from 'react-native';
 import { Text, Button } from 'react-native-paper';
 import { useNavigation } from '@react-navigation/native';
@@ -12,6 +12,8 @@ function ConservacaoCarroceriaCheck() {
 
 
     const navigation = useNavigation();
+
+
 
     function handlePress() {
 
@@ -51,6 +53,7 @@ function ConservacaoCarroceriaCheck() {
                         type={item.type}
                     />
                 ))}
+
                 <View style={styles.containerBtns}>
                     <Button mode="contained" onPress={() => navigation.goBack()} style={styles.button}>
                         Voltar
