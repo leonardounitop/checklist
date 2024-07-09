@@ -87,36 +87,7 @@ export function reducerConservacao(state, action) {
         case 'SET_CONSERTAR_BANCO':
             return { ...state, consertarBancos: { ...state.consertarBancos, ...action.payload } };
         case 'RESET':
-            return {
-                parachoqueDianteiro: { conforme: null, img: null, obs: null },
-                parachoqueTraseiro: { conforme: null, img: null, obs: null },
-                protetorLateralEsquerdo: { conforme: null, img: null, obs: null },
-                protetorLateralDireito: { conforme: null, img: null, obs: null },
-                parabarroDireito: { conforme: null, img: null, obs: null },
-                parabarroEsquerdo: { conforme: null, img: null, obs: null },
-                paralamaDireito: { conforme: null, img: null, obs: null },
-                paralamaEsquerdo: { conforme: null, img: null, obs: null },
-                retrovisorExternoDireito: { conforme: null, img: null, obs: null },
-
-                retrovisorExternoEsquerdo: { conforme: null, img: null, obs: null },
-                retrovisorInterno: { conforme: null, img: null, obs: null },
-                farois: { conforme: null, img: null, obs: null },
-                latariaCapo: { conforme: null, img: null, obs: null },
-                lentesLanternasTraseiras: { conforme: null, img: null, obs: null },
-                latariaPortaDireita: { conforme: null, img: null, obs: null },
-                latariaPortaEsquerda: { conforme: null, img: null, obs: null },
-                tacografo: { conforme: null, img: null, obs: null },
-                painelInstrumentos: { conforme: null, img: null, obs: null },
-                caixaCozinha: { conforme: null, img: null, obs: null },
-                parabrisa: { conforme: null, img: null, obs: null },
-                aerofolio: { conforme: null, img: null, obs: null },
-                nivelAgua: { conforme: null, img: null, obs: null },
-                vazamentoAgua: { conforme: null, img: null, obs: null },
-                nivelOleoMotor: { conforme: null, img: null, obs: null },
-                vazamentoOleoMotor: { conforme: null, img: null, obs: null },
-                avariaLataria: { conforme: null, img: null, obs: null },
-                consertarBancos: { conforme: null, img: null, obs: null },
-            };
+            return initialStateConservacao;
         default:
             return state;
     }

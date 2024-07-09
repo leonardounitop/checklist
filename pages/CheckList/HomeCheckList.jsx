@@ -25,6 +25,9 @@ function HomeCheckList() {
     const contextCarroceria = useContext(CarroceriaContext)
 
 
+    const [loading, setLoading] = useState(null);
+
+
 
     function resetFields() {
         contextPneu.dispatch({ type: 'RESET' });
@@ -37,7 +40,7 @@ function HomeCheckList() {
     }
 
 
-    const { setTipoCheckList } = useContext(GlobalContext);
+    const { setTipoCheckList, setNumeroEixosVeiculo, numeroEixosVeiculo } = useContext(GlobalContext);
 
     const [idPlaca, setIdPlaca] = useState(null);   // Armazenas o id do veiculo
     const [placaLabel, setPlacaLabel] = useState(''); //Armazenar o rótulo da placa selecionada
@@ -45,24 +48,16 @@ function HomeCheckList() {
 
     const [dropOpenVeiculo, setDropOpenVeiculo] = useState(false);    // estado do dropdown
     const [dropOpenMotorista, setDropOpenMotorista] = useState(false);    // estado do dropdown
-    const [dropOpenCheckList, setDropOpenCheckList] = useState(false);    // estado do dropdown
+    // const [dropOpenCheckList, setDropOpenCheckList] = useState(false);    // estado do dropdown
 
     const [tipoVeiculo, setTipoVeiculo] = useState(null);
-
+    const [checkList, setCheckList] = useState(null);
     const [listMotorista, setListMotorista] = useState(null);
     const [motoristaLabel, setMotoristaLabel] = useState(null);
     const [idMotorista, setIdMotorista] = useState(null);
 
 
-    const [listCheckListType, setListCheckListType] = useState(null);
-    const [checkList, setCheckList] = useState(null);
-
-
     const navigation = useNavigation();
-
-
-    const theme = useTheme();
-
 
 
 
@@ -93,17 +88,9 @@ function HomeCheckList() {
         setMotoristaLabel(selectedMotorista ? selectedMotorista.label : '');
     };
 
-    const handleChangeValueCheckList = (value) => {
-        setCheckList(value);
-
-        if (value) {
-            setTipoCheckList(value);
-        }
-    };
 
     // Primeiro fetch para pegar a lista de placas
     useEffect(() => {
-
 
         const fetchData = async () => {
             try {
@@ -135,6 +122,8 @@ function HomeCheckList() {
     // verificar o tipo do veiculo e pegar o tipo da checklist
     useEffect(() => {
         const fetchData = async () => {
+            setLoading(true);
+
             try {
                 const response = await fetch('https://homologacao.unitopconsultoria.com.br/AppCheckList/execute.php', {
                     method: 'POST',
@@ -145,47 +134,76 @@ function HomeCheckList() {
                     })
                 });
 
-                if (!response.ok) {
-                    throw new Error(`HTTP error! status: ${response.status}`);
+                const responseNumeroEixos = await fetch('https://homologacao.unitopconsultoria.com.br/AppCheckList/execute.php', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        tipoConsulta: 'retornarNumeroEixos',
+                        idVeiculo: idPlaca
+                    })
+                });
+
+                if (!response.ok || !responseNumeroEixos.ok) {
+                    if (!response.ok) {
+                        throw new Error(`HTTP error! Erro Fetch Tipo Checklist status: ${response.status}`);
+                    } else if (!responseNumeroEixos.ok) {
+                        throw new Error(`HTTP error! Erro Fetch numero Eixos status: ${responseNumeroEixos.status}`);
+                    }
+                }
+
+
+                // Atualizando a quantidade de eixos do veiculo.
+                const jsonNumeroEixos = await responseNumeroEixos.json();
+
+                if ('coalesce' in jsonNumeroEixos[0]) {
+                    setNumeroEixosVeiculo(jsonNumeroEixos[0].coalesce);
                 }
 
                 const json = await response.json();
                 const obj = JSON.parse(json);
-
-
 
                 if (obj.autentic === 'sucess') {
                     setTipoVeiculo(obj.Tipo)
                     contextVeiculo.dispatch({ type: 'SET_TIPO', payload: obj.Tipo || "Não Cadastrado" })
 
 
-                    const objListCheck = [];
                     obj.Checklist.forEach(v => {
                         let formatarValor = '';
 
-                        if (v === 'checklist_veiculo_leve') {
+                        if (obj.isCavalo) {
+                            formatarValor = 'Checklist Cavalo';
+
+                        } else if (v === 'checklist_veiculo_leve') {
+
                             formatarValor = 'Checklist Veículo Leve';
                         } else if (v === 'checklist_toco_truck_3_4') {
+
                             formatarValor = 'Checklist Troco,Truck 3/4';
                         } else if (v === 'checklist_graneleiro') {
+
                             formatarValor = 'Checklist Graneleiro';
                         } else if (v === 'checklist_carretabau') {
+
                             formatarValor = 'Checklist Carreta Baú';
                         } else if (v === 'checklist_thermoking') {
+
                             formatarValor = 'Checklist Thermoking';
                         } else if (v === 'checklist_sider') {
+
                             formatarValor = 'Checklist Sider';
                         }
 
 
-                        objListCheck.push({ label: formatarValor, value: v })
+                        setTipoCheckList(v);
+                        setCheckList(formatarValor);
                     });
-                    setListCheckListType(objListCheck);
 
                 }
 
             } catch (error) {
                 console.error('Fetch error:', error);
+            } finally {
+                setLoading(false);
             }
         };
 
@@ -234,8 +252,7 @@ function HomeCheckList() {
     function handlePress() {
 
 
-
-        if (idPlaca && placaLabel && motoristaLabel && idMotorista && checkList) {
+        if (idPlaca && placaLabel && motoristaLabel && idMotorista && checkList && numeroEixosVeiculo) {
             navigation.navigate('Veiculo')
         } else {
             Alert.alert('Atenção! Escolha todas informações!');
@@ -281,24 +298,18 @@ function HomeCheckList() {
                 /> : <Text>Carregando...</Text>}
 
 
-                <Text style={GlobalStyles.title}>Tipo CheckList</Text>
-
-                {listCheckListType ? <DropDownPicker
-                    value={checkList}
-                    items={listCheckListType}
-                    open={dropOpenCheckList}
-                    setValue={setCheckList}
-                    onChangeValue={handleChangeValueCheckList}
-                    setOpen={setDropOpenCheckList}
-                    searchable={false}
-                    placeholder={listCheckListType ? 'Selecione a checklist' : 'Escolha uma placa primeiro'}
-                    style={{ marginBottom: 10 }}
-                    listMode="SCROLLVIEW"
-                /> : <Text>Escolha uma placa para selecionar o tipo da checklist</Text>}
+                <Text style={GlobalStyles.title}>Tipo CheckList </Text>
+                <Text style={styles.textCheck}>{loading ? 'Carregando...' : checkList ? `${checkList}. Nº Eixos: ${numeroEixosVeiculo}` : 'Informe uma placa para carregar a checklist'}</Text>
 
 
+                <Button
+                    mode="contained"
+                    onPress={handlePress}
+                    style={styles.button}
+                    loading={loading}
+                    disabled={loading}
 
-                <Button mode="contained" onPress={handlePress} style={styles.button}>
+                >
                     Continuar
                 </Button>
             </ScrollView>
@@ -331,6 +342,8 @@ const styles = StyleSheet.create({
         marginTop: 20
     }, containerPlacaTipo: {
         flexDirection: "row"
+    }, textCheck: {
+        fontSize: 16,
     }
 });
 

@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from 'react'
+import React, { useContext, useState } from 'react'
 import { View, StyleSheet, Alert } from 'react-native'
 import { Button, TextInput } from 'react-native-paper';
 import { GlobalContext } from '../../Context/GlobalVault';
@@ -12,10 +12,7 @@ function Login() {
     const [senha, setSenha] = useState(null);
     const [loading, setLoading] = useState(false);
     const { setIdUsuario, setNomeUsuario } = useContext(GlobalContext);
-    const { setResponsavel } = useContext(MotoristaContext)
-
-
-
+    const { setResponsavel } = useContext(MotoristaContext);
     const navigation = useNavigation();
 
 
@@ -43,6 +40,7 @@ function Login() {
 
                 const json = await response.json();
                 const obj = JSON.parse(json);
+
 
 
                 if (obj.autentic == 'sucess') {

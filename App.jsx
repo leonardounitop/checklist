@@ -66,6 +66,6 @@ export default function App() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    marginTop: 25, // Garante que o conteúdo não fique sob a StatusBar
+    marginTop: 40, // Garante que o conteúdo não fique sob a StatusBar
   },
 });

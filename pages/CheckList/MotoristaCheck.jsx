@@ -18,11 +18,9 @@ import { GlobalContext } from '../../Context/GlobalVault';
 
 function MotoristaCheck() {
 
-    const [loading, setLoading] = useState(false);
-
-
     const navigation = useNavigation();
 
+    const [loading, setLoading] = useState(false);
 
     const contextPneu = useContext(PneusContext);
     const contextGlobal = useContext(GlobalContext);
@@ -310,6 +308,7 @@ function MotoristaCheck() {
             if (obj.autentic == 'sucess') {
                 resetFields();
                 contextGlobal.setPrimaryKey(null);
+                contextGlobal.setNumeroEixosVeiculo(null);
                 navigation.dispatch(
                     CommonActions.reset({
                         index: 0,
@@ -341,7 +340,7 @@ function MotoristaCheck() {
 
 
     function handlePress() {
-
+        if (loading) return;
 
         let checkValues = true;
 

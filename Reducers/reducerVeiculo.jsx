@@ -34,18 +34,7 @@ export function reducerVeiculo(state, action) {
         case 'SET_NUM_THERMOKING_IMG':
             return { ...state, numThermokingImagem: { ...state.numThermokingImagem, ...action.payload } };
         case 'RESET':
-            return {
-                entregaDevolucao: null,
-                placa: null,
-                tipo: null,
-                data: new Date().toLocaleDateString('pt-br'),
-                filial: null,
-                kmTotal: null,
-                horimetro: '0',
-                idPlaca: null,
-                horimetroImagem: { conforme: null, img: null },
-                numThermokingImagem: { conforme: null, img: null }
-            };
+            return initialVeiculoState;
         default:
             return state;
     }

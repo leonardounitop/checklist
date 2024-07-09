@@ -65,28 +65,7 @@ export function reducerFerramentas(state, action) {
         case 'SET_ACENDEDOR_CIGARRO':
             return { ...state, acendedorCigarro: { ...state.acendedorCigarro, ...action.payload } };
         case 'RESET':
-            return {
-                extintor: { conforme: null },
-                cordas: { confome: null },
-                correnteEstepe: { conforme: null },
-                cintas: { conforme: null },
-                catracas: { conforme: null },
-                cones: { conforme: null },
-                corote: { conforme: null },
-                macacoHidraulico: { conforme: null },
-                chaveRoda: { conforme: null },
-                trianguloSinalizacao: { conforme: null },
-                antenasPX: { conforme: null },
-                radioPX: { conforme: null },
-                jogoChinil: { conforme: null },
-                lonaCobertura: { conforme: null },
-                tabletRastreamento: { conforme: null },
-                travaPallet: { conforme: null },
-                chapatex: { conforme: null },
-                quebraSol: { conforme: null },
-                som: { conforme: null },
-                acendedorCigarro: { conforme: null },
-            };
+            return initialStateFerramentas;
         default:
             return state;
     }
