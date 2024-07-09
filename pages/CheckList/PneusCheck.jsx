@@ -1,7 +1,7 @@
-import React, { useContext, useEffect, useState } from 'react';
-import { View, ScrollView, StyleSheet, Alert } from 'react-native';
+import React, { useContext } from 'react';
+import { View, ScrollView, StyleSheet } from 'react-native';
 import { Text, Button } from 'react-native-paper';
-import { useNavigation, CommonActions } from '@react-navigation/native';
+import { useNavigation } from '@react-navigation/native';
 import { PneusContext } from '../../Context/PneusVault';
 import RadioCardImg from '../../Components/Radio/RadioCardImg';
 
@@ -10,23 +10,9 @@ import { GlobalStyles } from '../../Styles/GlobalStyles';
 
 function PneusCheck() {
 
-    const [loading, setLoading] = useState(false);
 
     const contextPneu = useContext(PneusContext);
-
     const navigation = useNavigation();
-
-
-
-
-
-
-
-
-
-
-
-
 
     return (
         <ScrollView contentContainerStyle={{ flexGrow: 1 }}>

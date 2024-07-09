@@ -2,7 +2,7 @@ import React, { useContext, useState } from 'react';
 import { View, ScrollView, StyleSheet, Alert } from 'react-native';
 import Input from '../../Components/Input/Input';
 import Signature from '../../Components/Signature/Signature';
-import { useNavigation } from '@react-navigation/native';
+import { useNavigation, CommonActions } from '@react-navigation/native';
 import { Text, Button } from 'react-native-paper';
 import RadioCardImg from '../../Components/Radio/RadioCardImg';
 import { MotoristaContext } from '../../Context/MotoristaVault';
@@ -21,7 +21,6 @@ function MotoristaCheck() {
     const [loading, setLoading] = useState(false);
 
 
-    const { dadosCheckMotorista, state, dispatch } = useContext(MotoristaContext);
     const navigation = useNavigation();
 
 
@@ -34,6 +33,7 @@ function MotoristaCheck() {
     const contextConservacao = useContext(ConservacaoContext);
     const contextCarroceria = useContext(CarroceriaContext)
 
+    const { dadosCheckMotorista, state, dispatch } = contextMotorista;
 
 
     function resetFields() {
