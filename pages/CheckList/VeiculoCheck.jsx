@@ -194,7 +194,7 @@ function VeiculoCheck() {
 
 
         if (checkValues && state.filial) {
-            navigation.navigate('Motorista')
+            navigation.navigate('Documentacao')
         } else {
             Alert.alert('Atenção! Preencha todos os campos!');
         }

@@ -30,11 +30,7 @@ function Routes() {
                 component={VeiculoCheck}
                 options={{ headerShown: false }}
             />
-            <AuthStack.Screen
-                name='Motorista'
-                component={MotoristaCheck}
-                options={{ headerShown: false }}
-            />
+
             <AuthStack.Screen
                 name='Documentacao'
                 component={DocumentacaoCheck}
@@ -60,6 +56,11 @@ function Routes() {
             <AuthStack.Screen
                 name='Pneus'
                 component={PneusCheck}
+                options={{ headerShown: false }}
+            />
+            <AuthStack.Screen
+                name='Motorista'
+                component={MotoristaCheck}
                 options={{ headerShown: false }}
             />
         </AuthStack.Navigator>

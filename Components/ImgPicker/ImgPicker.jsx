@@ -16,7 +16,7 @@ function ImgPicker({ state, setState }) {
         }
 
         let result = await ImagePicker.launchCameraAsync({
-            allowsEditing: true,
+            allowsEditing: false,
             quality: 0.5,
             base64: true
         });
