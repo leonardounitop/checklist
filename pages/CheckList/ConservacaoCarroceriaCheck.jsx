@@ -9,8 +9,6 @@ import { GlobalStyles } from '../../Styles/GlobalStyles';
 
 function ConservacaoCarroceriaCheck() {
     const { dadosCheckConservacaoCarroceria } = useContext(CarroceriaContext);
-
-
     const navigation = useNavigation();
 
 

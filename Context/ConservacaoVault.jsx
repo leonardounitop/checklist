@@ -61,21 +61,9 @@ export function ConservacaoVault({ children }) {
             ]);
         } else if (tipoCheckList === 'checklist_thermoking') {
             camposConservacao = [{
-                label: 'PARA CHOQUE DIANTEIRO',
-                type: 'img/checkbox',
-                state: state.parachoqueDianteiro,
-                setState: setParachoqueDianteiro
+                label: 'PARA CHOQUE DIANTEIRO', type: 'img/checkbox', state: state.parachoqueDianteiro, setState: setParachoqueDianteiro
             },
-            ...camposConservacao, {
-                label: 'RETROVISOR EXTERNO LADO DIREITO', type: 'img/checkbox',
-                state: state.retrovisorExternoDireito, setState: setRetrovisorExternoDireito
-            },
-            {
-                label: 'RETROVISOR EXTERNO LADO ESQUERDO',
-                type: 'img/checkbox',
-                state: state.retrovisorExternoEsquerdo,
-                setState: setRetrovisorExternoEsquerdo
-            },];
+            ...camposConservacao];
         } else if (tipoCheckList === 'checklist_sider') {
             camposConservacao = [{
                 label: 'PARA CHOQUE DIANTEIRO',
@@ -111,15 +99,15 @@ export function ConservacaoVault({ children }) {
             { label: 'RETROVISOR EXTERNO LADO DIREITO', type: 'img/checkbox', state: state.retrovisorExternoDireito, setState: setRetrovisorExternoDireito },
             { label: 'RETROVISOR EXTERNO LADO ESQUERDO', type: 'img/checkbox', state: state.retrovisorExternoEsquerdo, setState: setRetrovisorExternoEsquerdo },
             { label: 'RETROVISOR INTERNO', type: 'img/checkbox', state: state.retrovisorInterno, setState: setRetrovisorInterno },
-            { label: 'Verificar Nível D\'Água', type: 'img/checkbox', state: state.nivelAgua, setState: setNivelAgua },
-            { label: 'Verificar Vazamento D\'Água', type: 'img/checkbox', state: state.vazamentoAgua, setState: setVazamentoAgua },
-            { label: 'Verificar Nível do Óleo de Motor', type: 'img/checkbox', state: state.nivelOleoMotor, setState: setNivelOleoMotor },
-            { label: 'Verificar Vazamentos de Óleo do Motor', type: 'img/checkbox', state: state.vazamentoOleoMotor, setState: setVazamentoOleoMotor },
             { label: 'Avaria na Lataria', type: 'img/checkbox', state: state.avariaLataria, setState: setAvariaLataria },
             { label: 'LATARIA CAPO', type: 'img/checkbox', state: state.latariaCapo, setState: setLatariaCapo },
             { label: 'LATARIA PORTA DIREITA', type: 'img/checkbox', state: state.latariaPortaDireita, setState: setLatariaPortaDireita },
             { label: 'LATARIA PORTA ESQUERDA', type: 'img/checkbox', state: state.latariaPortaEsquerda, setState: setLatariaPortaEsquerda },
             { label: 'Verificar e Consertar Bancos', type: 'img/checkbox', state: state.consertarBancos, setState: setConsertarBanco },
+            { label: 'Verificar Nível D\'Água', type: 'checkbox', state: state.nivelAgua, setState: setNivelAgua },
+            { label: 'Verificar Vazamento D\'Água', type: 'checkbox', state: state.vazamentoAgua, setState: setVazamentoAgua },
+            { label: 'Verificar Nível do Óleo de Motor', type: 'checkbox', state: state.nivelOleoMotor, setState: setNivelOleoMotor },
+            { label: 'Verificar Vazamentos de Óleo do Motor', type: 'checkbox', state: state.vazamentoOleoMotor, setState: setVazamentoOleoMotor },
             ];
         }
 
@@ -162,6 +150,9 @@ export function ConservacaoVault({ children }) {
             setParalamaEsquerdo({ conforme: hasValue(dadosRecebimento[0]['5_v']), img: { uri: concatUri(dadosRecebimento[0]['5_w']) }, obs: dadosRecebimento[0]['5_x'] });
             setRetrovisorExternoDireito({ conforme: hasValue(dadosRecebimento[0]['5_y']), img: { uri: concatUri(dadosRecebimento[0]['5_z']) }, obs: dadosRecebimento[0]['5_aa'] });
             setRetrovisorExternoEsquerdo({ conforme: hasValue(dadosRecebimento[0]['5_ab']), img: { uri: concatUri(dadosRecebimento[0]['5_ac']) }, obs: dadosRecebimento[0]['5_ad'] });
+
+            setRetrovisorInterno({ conforme: hasValue(dadosRecebimento[0]['5_aas']), img: { uri: concatUri(dadosRecebimento[0]['5_aat']) }, obs: dadosRecebimento[0]['5_ad'] });
+
             setFarois({ conforme: hasValue(dadosRecebimento[0]['5_ae']), img: { uri: concatUri(dadosRecebimento[0]['5_af']) }, obs: dadosRecebimento[0]['5_ag'] });
             setLatariaCapo({ conforme: hasValue(dadosRecebimento[0]['5_ah']), img: { uri: concatUri(dadosRecebimento[0]['5_ai']) }, obs: dadosRecebimento[0]['5_aj'] });
             setLentesLanternasTraseiras({ conforme: hasValue(dadosRecebimento[0]['5_ak']), img: { uri: concatUri(dadosRecebimento[0]['5_al']) }, obs: dadosRecebimento[0]['5_am'] });
@@ -185,79 +176,6 @@ export function ConservacaoVault({ children }) {
 
 
 
-    // '5_a': contextConservacao.state.parachoqueDianteiro.conforme,
-    // '5_b': isBase64(contextConservacao.state.parachoqueDianteiro.img),
-    // '5_c': contextConservacao.state.parachoqueDianteiro.obs,
-    // '5_d': contextConservacao.state.parachoqueTraseiro.conforme,
-    // '5_e': isBase64(contextConservacao.state.parachoqueTraseiro.img),
-    // '5_f': contextConservacao.state.parachoqueTraseiro.obs,
-    // '5_g': contextConservacao.state.protetorLateralEsquerdo.conforme,
-    // '5_h': isBase64(contextConservacao.state.protetorLateralEsquerdo.img),
-    // '5_i': contextConservacao.state.protetorLateralEsquerdo.obs,
-    // '5_j': contextConservacao.state.protetorLateralDireito.conforme,
-    // '5_k': isBase64(contextConservacao.state.protetorLateralDireito.img),
-    // '5_l': contextConservacao.state.protetorLateralDireito.obs,
-    // '5_m': contextConservacao.state.parabarroDireito.conforme,
-    // '5_n': isBase64(contextConservacao.state.parabarroDireito.img),
-    // '5_o': contextConservacao.state.parabarroDireito.os,
-    // '5_p': contextConservacao.state.parabarroEsquerdo.conforme,
-    // '5_q': isBase64(contextConservacao.state.parabarroEsquerdo.img),
-    // '5_r': contextConservacao.state.parabarroEsquerdo.os,
-    // '5_s': contextConservacao.state.paralamaDireito.conforme,
-    // '5_t': isBase64(contextConservacao.state.paralamaDireito.img),
-    // '5_u': contextConservacao.state.paralamaDireito.os,
-    // '5_v': contextConservacao.state.paralamaEsquerdo.conforme,
-    // '5_w': isBase64(contextConservacao.state.paralamaEsquerdo.img),
-    // '5_x': contextConservacao.state.paralamaEsquerdo.os,
-    // '5_y': contextConservacao.state.retrovisorExternoDireito.conforme,
-    // '5_z': isBase64(contextConservacao.state.retrovisorExternoDireito.img),
-    // '5_aa': contextConservacao.state.retrovisorExternoDireito.os,
-    // '5_ab': contextConservacao.state.retrovisorExternoEsquerdo.conforme,
-    // '5_ac': isBase64(contextConservacao.state.retrovisorExternoEsquerdo.img),
-    // '5_ad': contextConservacao.state.retrovisorExternoEsquerdo.os,
-    // '5_ae': contextConservacao.state.farois.conforme,
-    // '5_af': isBase64(contextConservacao.state.farois.img),
-    // '5_ag': contextConservacao.state.farois.os,
-    // '5_ah': contextConservacao.state.latariaCapo.conforme,
-    // '5_ai': isBase64(contextConservacao.state.latariaCapo.img),
-    // '5_aj': contextConservacao.state.latariaCapo.os,
-    // '5_ak': contextConservacao.state.lentesLanternasTraseiras.conforme,
-    // '5_al': isBase64(contextConservacao.state.lentesLanternasTraseiras.img),
-    // '5_am': contextConservacao.state.lentesLanternasTraseiras.os,
-    // '5_an': contextConservacao.state.latariaPortaDireita.conforme,
-    // '5_ao': isBase64(contextConservacao.state.latariaPortaDireita.img),
-    // '5_ap': contextConservacao.state.latariaPortaDireita.os,
-    // '5_aq': contextConservacao.state.latariaPortaEsquerda.conforme,
-    // '5_ar': isBase64(contextConservacao.state.latariaPortaEsquerda.img),
-    // '5_as': contextConservacao.state.latariaPortaEsquerda.os,
-    // '5_at': contextConservacao.state.tacografo.conforme,
-    // '5_au': isBase64(contextConservacao.state.tacografo.img),
-    // '5_av': contextConservacao.state.tacografo.os,
-    // '5_aw': contextConservacao.state.painelInstrumentos.conforme,
-    // '5_ax': isBase64(contextConservacao.state.painelInstrumentos.img),
-    // '5_ay': contextConservacao.state.painelInstrumentos.os,
-    // '5_az': contextConservacao.state.caixaCozinha.conforme,
-    // '5_aaa': isBase64(contextConservacao.state.caixaCozinha.img),
-    // '5_aab': contextConservacao.state.caixaCozinha.os,
-    // '5_aac': contextConservacao.state.parabrisa.conforme,
-    // '5_aad': isBase64(contextConservacao.state.parabrisa.img),
-    // '5_aae': contextConservacao.state.parabrisa.os,
-    // '5_aaf': contextConservacao.state.aerofolio.conforme,
-    // '5_aag': isBase64(contextConservacao.state.aerofolio.img),
-    // '5_aah': contextConservacao.state.aerofolio.os,
-    // '5_aaf': contextConservacao.state.aerofolio.conforme,
-    // '5_aag': isBase64(contextConservacao.state.aerofolio.img),
-    // '5_aah': contextConservacao.state.aerofolio.os,
-    // '5_aai': contextConservacao.state.nivelAgua.conforme,
-    // '5_aaj': contextConservacao.state.vazamentoAgua.conforme,
-    // '5_aak': contextConservacao.state.nivelOleoMotor.conforme,
-    // '5_aal': contextConservacao.state.vazamentoOleoMotor.conforme,
-    // '5_aam': contextConservacao.state.avariaLataria.conforme,
-    // '5_aan': isBase64(contextConservacao.state.avariaLataria.img),
-    // '5_aao': contextConservacao.state.avariaLataria.obs,
-    // '5_aap': contextConservacao.state.consertarBancos.conforme,
-    // '5_aaq': isBase64(contextConservacao.state.consertarBancos.img),
-    // '5_aar': contextConservacao.state.consertarBancos.obs,
 
     return (
         <ConservacaoContext.Provider value={{ dadosCheckConservacaoVeiculo, state, dispatch }}>{children}</ConservacaoContext.Provider>

@@ -199,6 +199,9 @@ function MotoristaCheck() {
                     '5_aaq': isBase64(contextConservacao.state.consertarBancos.img),
                     '5_aar': contextConservacao.state.consertarBancos.obs,
 
+                    '5_aas': isBool(contextConservacao.state.retrovisorInterno.conforme),
+                    '5_aat': isBase64(contextConservacao.state.retrovisorInterno.img),
+
 
                     '6_a': isBool(contextCarroceria.state.frenteInterno.conforme),
                     '6_b': isBase64(contextCarroceria.state.frenteInterno.img),
@@ -227,18 +230,20 @@ function MotoristaCheck() {
                     '6_y': isBool(contextCarroceria.state.ladoEsquerdoExterno.conforme),
                     '6_z': isBase64(contextCarroceria.state.ladoEsquerdoExterno.img),
                     '6_aa': contextCarroceria.state.ladoEsquerdoExterno.obs,
-                    // '6_y': isBool(contextCarroceria.state.ladoEsquerdoExterno.conforme),
-                    // '6_z': isBase64(contextCarroceria.state.ladoEsquerdoExterno.img),
-                    // '6_aa': contextCarroceria.state.ladoEsquerdoExterno.obs,
+
                     '6_ab': contextCarroceria.state.ganchos.conforme,
                     '6_ac': isBase64(contextCarroceria.state.ganchos.img),
                     '6_ad': contextCarroceria.state.tendal.conforme,
+
                     '6_ae': isBase64(contextCarroceria.state.tendal.img),
+
                     '6_af': contextCarroceria.state.cortina.conforme,
                     '6_ag': isBase64(contextCarroceria.state.cortina.img),
+
                     '6_ah': isBool(contextCarroceria.state.statusPreventiva.conforme),
                     '6_ai': isBool(contextCarroceria.state.partidaVeiculo.conforme),
                     '6_aj': isBool(contextCarroceria.state.esguichoParabrisa.conforme),
+
                     '6_ak': isBool(contextCarroceria.state.limpadoresParaBrisa.conforme),
                     '6_al': isBool(contextCarroceria.state.buzina.conforme),
                     '6_am': isBool(contextCarroceria.state.setasDianteira.conforme),
@@ -303,6 +308,8 @@ function MotoristaCheck() {
 
             const json = await response.json();
             const obj = JSON.parse(json);
+
+            // console.log(obj);
 
 
             if (obj.autentic == 'sucess') {

@@ -93,6 +93,10 @@ export function CarroceriaVault({ children }) {
         state, tipoCheckList, isCavalo
     ]);
 
+    const hasInput = (value) => {
+        return value ? value : null;
+    };
+
     const hasValue = (value) => {
         if (value === true) {
             return true;
@@ -123,9 +127,11 @@ export function CarroceriaVault({ children }) {
             setTraseiroExterno({ conforme: hasValue(dadosRecebimento[0]['6_s']), img: { uri: concatUri(dadosRecebimento[0]['6_t']) }, obs: dadosRecebimento[0]['6_u'] });
             setLadoDireitoExterno({ conforme: hasValue(dadosRecebimento[0]['6_v']), img: { uri: concatUri(dadosRecebimento[0]['6_w']) }, obs: dadosRecebimento[0]['6_x'] });
             setLadoEsquerdoExterno({ conforme: hasValue(dadosRecebimento[0]['6_y']), img: { uri: concatUri(dadosRecebimento[0]['6_z']) }, obs: dadosRecebimento[0]['6_aa'] });
-            setGanchos({ conforme: hasValue(dadosRecebimento[0]['6_ab']), img: { uri: concatUri(dadosRecebimento[0]['6_ac']) }, obs: dadosRecebimento[0]['6_ad'] });
-            setTendal({ conforme: hasValue(dadosRecebimento[0]['6_ae']), img: { uri: concatUri(dadosRecebimento[0]['6_af']) }, obs: dadosRecebimento[0]['6_ag'] });
-            setCortina({ conforme: hasValue(dadosRecebimento[0]['6_af']), img: { uri: concatUri(dadosRecebimento[0]['6_ag']) }, obs: dadosRecebimento[0]['6_ah'] });
+
+            setGanchos({ conforme: hasInput(dadosRecebimento[0]['6_ab']), img: { uri: concatUri(dadosRecebimento[0]['6_ac']) }, obs: dadosRecebimento[0]['6_ad'] });
+            setTendal({ conforme: hasInput(dadosRecebimento[0]['6_ad']), img: { uri: concatUri(dadosRecebimento[0]['6_ae']) }, obs: dadosRecebimento[0]['6_ag'] });
+            setCortina({ conforme: hasInput(dadosRecebimento[0]['6_af']), img: { uri: concatUri(dadosRecebimento[0]['6_ag']) }, obs: dadosRecebimento[0]['6_ah'] });
+
             setStatusPreventiva({ conforme: hasValue(dadosRecebimento[0]['6_ah']) });
             setPartidaVeiculo({ conforme: hasValue(dadosRecebimento[0]['6_ai']) });
             setEsguichoParabrisa({ conforme: hasValue(dadosRecebimento[0]['6_aj']) });
