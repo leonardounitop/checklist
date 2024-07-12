@@ -79,7 +79,7 @@ function VeiculoCheck() {
 
                         const jsonRecebimento = JSON.parse(await responseRecebimento.json());
 
-                        console.log(jsonRecebimento);
+                        // console.log(jsonRecebimento);
 
                         if (jsonRecebimento.autentic === 'sucess') {
                             setDadosRecebimento(jsonRecebimento.Objecto);

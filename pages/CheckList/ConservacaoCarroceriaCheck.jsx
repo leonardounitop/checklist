@@ -20,7 +20,7 @@ function ConservacaoCarroceriaCheck() {
         dadosCheckConservacaoCarroceria.forEach(v => {
             if (typeof v.state === 'object' && v.state !== null) {
                 if (v.type === 'checkbox') {
-                    checkValues = v.state.conforme === null ? false : true;
+                    checkValues = v.state.conforme === null ? false : checkValues;
                 } else if (v.state.img === null || v.state.conforme === null) {
                     checkValues = false;
                 }

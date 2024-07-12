@@ -53,10 +53,8 @@ export default function App() {
           </GlobalVault>
         </SafeAreaView>
         <StatusBar
-          barStyle="light-content" // ou "dark-content"
-          backgroundColor="#fff"
-          hidden={false}
-          translucent={true}
+          style='dark'
+          backgroundColor="#eee"
         />
       </NavigationContainer>
     </PaperProvider>
@@ -66,6 +64,6 @@ export default function App() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    marginTop: 40, // Garante que o conteúdo não fique sob a StatusBar
+    marginTop: 25, // Garante que o conteúdo não fique sob a StatusBar
   },
 });
