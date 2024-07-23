@@ -60,10 +60,8 @@ export function ConservacaoVault({ children }) {
                 { label: 'CAIXA DE COZINHA', type: 'img/checkbox', state: state.caixaCozinha, setState: setCaixaCozinha },
             ]);
         } else if (tipoCheckList === 'checklist_thermoking') {
-            camposConservacao = [{
-                label: 'PARA CHOQUE DIANTEIRO', type: 'img/checkbox', state: state.parachoqueDianteiro, setState: setParachoqueDianteiro
-            },
-            ...camposConservacao];
+            camposConservacao = [
+                ...camposConservacao];
         } else if (tipoCheckList === 'checklist_sider') {
             camposConservacao = [{
                 label: 'PARA CHOQUE DIANTEIRO',

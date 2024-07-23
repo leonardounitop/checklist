@@ -63,9 +63,12 @@ export function PneusVault({ children }) {
             { label: "E2", state: state.estepeDois, setState: setEstopeDois, type: 'img/input', inputProps: { keyboardType: 'numeric' } },
         ];
 
+        // Verificar se é thermoking ou carretabau, ja que o dois sao o mesmo checklist
+        const isCarretaOrThermo = tipoCheckList == 'checklist_carretabau' || tipoCheckList == 'checklist_thermoking';
+        const isNotLeveBauThermo = tipoCheckList != 'checklist_veiculo_leve' && tipoCheckList != 'checklist_carretabau' && tipoCheckList != 'checklist_thermoking';
 
         switch (true) {
-            case tipoCheckList != 'checklist_veiculo_leve' && tipoCheckList != 'checklist_carretabau' && numeroEixosVeiculo == 2:
+            case isNotLeveBauThermo && numeroEixosVeiculo == 2:
                 camposPneus = [
                     { label: "1DE", state: state.primeiroDE, setState: setPrimeiroDE, type: 'img/input', inputProps: { keyboardType: 'numeric' } },
                     { label: "1EE", state: state.primeiroEE, setState: setPrimeiroEE, type: 'img/input', inputProps: { keyboardType: 'numeric' } },
@@ -77,7 +80,7 @@ export function PneusVault({ children }) {
                     { label: "E2", state: state.estepeDois, setState: setEstopeDois, type: 'img/input', inputProps: { keyboardType: 'numeric' } },
                 ];
                 break;
-            case tipoCheckList != 'checklist_veiculo_leve' && tipoCheckList != 'checklist_carretabau' && numeroEixosVeiculo == 3:
+            case isNotLeveBauThermo && numeroEixosVeiculo == 3:
                 camposPneus = [
                     { label: "1DE", state: state.primeiroDE, setState: setPrimeiroDE, type: 'img/input', inputProps: { keyboardType: 'numeric' } },
                     { label: "1EE", state: state.primeiroEE, setState: setPrimeiroEE, type: 'img/input', inputProps: { keyboardType: 'numeric' } },
@@ -93,7 +96,7 @@ export function PneusVault({ children }) {
                     { label: "E2", state: state.estepeDois, setState: setEstopeDois, type: 'img/input', inputProps: { keyboardType: 'numeric' } },
                 ];
                 break;
-            case tipoCheckList == 'checklist_carretabau' && numeroEixosVeiculo == 2:
+            case isCarretaOrThermo && numeroEixosVeiculo == 2:
                 camposPneus = [
                     { label: "1DE", state: state.primeiroDE, setState: setPrimeiroDE, type: 'img/input', inputProps: { keyboardType: 'numeric' } },
                     { label: "1DI", state: state.primeiroDI, setState: setPrimeiroDI, type: 'img/input', inputProps: { keyboardType: 'numeric' } },
@@ -107,7 +110,7 @@ export function PneusVault({ children }) {
                     { label: "E2", state: state.estepeDois, setState: setEstopeDois, type: 'img/input', inputProps: { keyboardType: 'numeric' } },
                 ];
                 break;
-            case tipoCheckList == 'checklist_carretabau' && numeroEixosVeiculo == 3:
+            case isCarretaOrThermo && numeroEixosVeiculo == 3:
                 camposPneus = [
                     { label: "1DE", state: state.primeiroDE, setState: setPrimeiroDE, type: 'img/input', inputProps: { keyboardType: 'numeric' } },
                     { label: "1DI", state: state.primeiroDI, setState: setPrimeiroDI, type: 'img/input', inputProps: { keyboardType: 'numeric' } },
