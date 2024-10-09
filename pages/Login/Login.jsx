@@ -42,7 +42,6 @@ function Login() {
                 const obj = JSON.parse(json);
 
 
-
                 if (obj.autentic == 'sucess') {
                     setIdUsuario(obj.idUser);
                     setNomeUsuario(obj.name);

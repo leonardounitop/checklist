@@ -87,7 +87,8 @@ function MotoristaCheck() {
 
 
             setLoading(true);
-            const response = await fetch('https://homologacao.unitopconsultoria.com.br/AppCheckList/execute.php', {
+
+            const options = {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({
@@ -314,34 +315,52 @@ function MotoristaCheck() {
                     '7_al': await isBase64(contextPneu.state.leveEstepeUm.img),
 
                 })
+            }
+
+            const post = fetch('https://homologacao.unitopconsultoria.com.br/AppCheckList/execute.php', options);
+
+            const timer = new Promise((resolve) => {
+                setTimeout(resolve, 15000, 'expirou');
             });
 
-            if (!response.ok) {
-                throw new Error(`HTTP error! status: ${response.status}`);
-            }
+            const response = await Promise.race([post, timer]);
 
 
-            const json = await response.json();
-            const obj = JSON.parse(json);
-
-
-
-
-            if (obj.autentic == 'sucess') {
-                resetFields();
-                contextGlobal.setPrimaryKey(null);
-                contextGlobal.setNumeroEixosVeiculo(null);
-                contextGlobal.setIsCavalo(null);
-                navigation.dispatch(
-                    CommonActions.reset({
-                        index: 0,
-                        routes: [{ name: 'Home' }],
-                    })
-                );
-                Alert.alert('Checklist Finalizada com Sucesso! ' + `${obj.status}`);
+            if (response === 'expirou') {
+                Alert.alert(`Não há uma resposta do servidor. Tente novamente.`);
             } else {
-                Alert.alert('Ocorreu um erro!' + `${obj.message}`);
+                if (!response.ok) {
+                    Alert.alert('Ocorreu um erro!' + `Status Code: ${response.status}`);
+                    throw new Error(`HTTP error! status: ${response.status}`);
+                }
+
+                const json = await response.json();
+                const obj = JSON.parse(json);
+
+
+                if (obj.autentic == 'sucess') {
+                    resetFields();
+                    contextGlobal.setPrimaryKey(null);
+                    contextGlobal.setNumeroEixosVeiculo(null);
+                    contextGlobal.setIsCavalo(null);
+                    navigation.dispatch(
+                        CommonActions.reset({
+                            index: 0,
+                            routes: [{ name: 'Home' }],
+                        })
+                    );
+
+
+                    Alert.alert(`Checklist Finalizada com Sucesso! \n  ${obj.status}`);
+                } else {
+                    Alert.alert(`Ocorreu um erro! \n ${obj.message}`);
+                }
+
+
             }
+
+
+
 
 
 
